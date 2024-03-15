@@ -1,4 +1,5 @@
 const urlBase = 'https://pokeapi.co/api/v2/';
+import { listPokemon, pokemon } from './model/interface';
 
 export class PokemonRepository {
   url: URL;
@@ -10,7 +11,7 @@ export class PokemonRepository {
     const url = new URL(this.url);
     url.searchParams.append('offset', offset.toString());
     url.searchParams.append('limit', limit.toString());
-    console.log('URL della richiesta:', url);
+    console.log('api connessa:', url);
     const response = await fetch(url);
     if (!response.ok) {
       const message = `Error fetching Pokemon: ${response.status} ${response.statusText}`;
@@ -18,6 +19,6 @@ export class PokemonRepository {
       throw new Error(message);
     }
 
-    return response.json();
+    return response.json().then;
   }
 }

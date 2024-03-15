@@ -1,20 +1,12 @@
-import './styles.css';
-/*  */
-/* import { Header } from './components/header';
-import { Main } from './components/main.ts'; */
-
-/* new Header('header');
-new Main('main'); */
+import { Main } from './components/main';
 import { PokemonRepository } from './repo';
-
-console.log('Connesso desde index.ts');
-
+import { listPokemon } from './model/interface';
 const repository = new PokemonRepository();
 
 repository
   .getAll(0, 20)
   .then((data) => {
-    console.log(data);
+    console.log(data); // Controlla che i dati siano corretti
   })
   .catch((error) => {
     console.error(error);
