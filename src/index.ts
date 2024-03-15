@@ -1,9 +1,21 @@
-/* eslint-disable no-new */
 import './styles.css';
+/*  */
+/* import { Header } from './components/header';
+import { Main } from './components/main.ts'; */
 
-import { Header } from './components/header';
+/* new Header('header');
+new Main('main'); */
+import { PokemonRepository } from './repo';
 
-import { Main } from './components/main.ts';
+console.log('Connesso desde index.ts');
 
-new Header('header');
-new Main('main');
+const repository = new PokemonRepository();
+
+repository
+  .getAll(0, 20)
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
