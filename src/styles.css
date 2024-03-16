@@ -2,6 +2,9 @@
   box-sizing: border-box;
   margin: 0;
 }
+body {
+  background-color: antiquewhite;
+}
 .header {
   background-color: red;
   display: flex;
@@ -12,12 +15,21 @@
 .main {
   background-color: antiquewhite;
   width: 100%;
-  height: 70vh;
+  height: fit-content;
   display: flex;
-  .container {
-    width: 100px;
-    height: 100px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  .pokemon {
+    width: fit-content;
+    padding: 0.5rem;
+    border-radius: 25px;
     border: 1px solid red;
+    .hearts {
+      height: 5px;
+      width: 5px;
+    }
   }
 }
 footer {
