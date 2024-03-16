@@ -9,6 +9,6 @@ export class Header extends Component {
   }
 
   createTemplate() {
-    return ``;
+    return `<p></p>`;
   }
 }
