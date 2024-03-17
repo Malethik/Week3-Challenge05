@@ -28,7 +28,7 @@ export class Main extends Component {
         this.template = this.createTemplate(pokemonDetails);
         this.render();
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         console.error('Errore durante il recupero dei dati:', error);
       });
   }
