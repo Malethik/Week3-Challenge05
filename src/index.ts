@@ -6,7 +6,6 @@ import { NavBar } from './components/navBar';
 import { PokemonRepository } from './repo';
 
 const repository = new PokemonRepository();
-console.log('Connesso desde index.ts');
 
 new Header('.app');
 new NavBar('.app');

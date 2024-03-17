@@ -44,7 +44,7 @@ export class PokemonRepository {
     }
 
     const detailsData = await response.json();
-    console.log(detailsData);
+    console.log('Api from pokemon:',detailsData);
     return detailsData;
   }
 }
