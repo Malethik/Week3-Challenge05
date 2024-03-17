@@ -5,7 +5,7 @@ export class Main extends Component {
     super(selector);
     repository
       .nextPage(0)
-      .then((data) => {
+      .then((data: { results: any[] }) => {
         const pokemonPromises = data.results.map((pokemon: any) =>
           fetch(pokemon.url)
             .then((detailsResponse) => {
@@ -24,11 +24,11 @@ export class Main extends Component {
 
         return Promise.all(pokemonPromises);
       })
-      .then((pokemonDetails) => {
+      .then((pokemonDetails: any[]) => {
         this.template = this.createTemplate(pokemonDetails);
         this.render();
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         console.error('Errore durante il recupero dei dati:', error);
       });
   }
