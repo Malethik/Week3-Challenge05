@@ -9,6 +9,11 @@ export class Header extends Component {
   }
 
   createTemplate() {
-    return `<p></p>`;
+    return `<header class="header">
+      <h1><img src="src/pokemon-logo.svg" alt="Pokedex" /></h1>
+      <nav>
+        <a href="#">MY POKEMON</a>
+      </nav>
+    </header>`;
   }
 }
