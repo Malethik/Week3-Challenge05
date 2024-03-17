@@ -1,14 +1,40 @@
 import { Component } from './component';
 
 export class Main extends Component {
-  constructor(selector: string, pokemonData: any[]) {
+  constructor(selector: string, repository: any) {
     super(selector);
-    this.template = this.createTemplate(pokemonData);
-    this.render();
+    repository
+      .nextPage(0)
+      .then((data) => {
+        const pokemonPromises = data.results.map((pokemon: any) =>
+          fetch(pokemon.url)
+            .then((detailsResponse) => {
+              if (!detailsResponse.ok) {
+                throw new Error(
+                  `Errore durante il recupero dei dettagli del Pokémon ${pokemon.name}`
+                );
+              }
+
+              return detailsResponse.json();
+            })
+            .catch((error) => {
+              console.error(error);
+            })
+        );
+
+        return Promise.all(pokemonPromises);
+      })
+      .then((pokemonDetails) => {
+        this.template = this.createTemplate(pokemonDetails);
+        this.render();
+      })
+      .catch((error) => {
+        console.error('Errore durante il recupero dei dati:', error);
+      });
   }
 
-  createTemplate(pokemonData: any[]) {
-    const pokemonTemplates = pokemonData.map(
+  createTemplate(pokemonDetails: any[]) {
+    const pokemonTemplates = pokemonDetails.map(
       (pokemon, _index) => `
         <div class="pokemon">
           <p>${pokemon.id}</p>

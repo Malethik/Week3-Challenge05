@@ -7,19 +7,39 @@ export class Footer extends Component {
   constructor(selector: string, repository: PokemonRepository) {
     super(selector);
     this.repository = repository;
+
     this.render();
+    this.createTemplate();
     this.addEventListeners();
   }
 
+  render() {
+    super.render();
+    this.createTemplate();
+    this.addEventListeners();
+  }
+
+  createTemplate() {
+    return `<p>prova</p>
+    <button type="button" class="previus">PREVIOUS</button>
+            <button type="button" class="next">NEXT</button>`;
+  }
+
   addEventListeners() {
-    const prevButton = this.element.querySelector('.previus');
+    if (!this.element) {
+      console.log(this.element);
+      console.error('previus non trovato');
+      return;
+    }
+
+    const prevButton =
+      this.element.querySelector<HTMLButtonElement>('.previus');
     if (prevButton) {
       prevButton.addEventListener('click', () => {
         this.repository
-          .previousPage()
+          .previousPage(20)
           .then(() => {
             console.log('Naviga alla pagina precedente');
-            // Aggiorna la visualizzazione con i nuovi dati ottenuti
           })
           .catch((error) => {
             console.error(
@@ -30,14 +50,18 @@ export class Footer extends Component {
       });
     }
 
-    const nextButton = this.element.querySelector('.next');
+    const nextButton = this.element.querySelector<HTMLButtonElement>('.next');
     if (nextButton) {
       nextButton.addEventListener('click', () => {
+        if (!this.element) {
+          console.error('next button non caricato');
+          return;
+        }
+
         this.repository
-          .nextPage()
+          .nextPage(20)
           .then(() => {
             console.log('Naviga alla pagina successiva');
-            // Aggiorna la visualizzazione con i nuovi dati ottenuti
           })
           .catch((error) => {
             console.error(
@@ -47,10 +71,5 @@ export class Footer extends Component {
           });
       });
     }
-  }
-
-  createTemplate() {
-    return `<button type="button" class="previus">PREVIOUS</button>
-            <button type="button" class="next">NEXT</button>`;
   }
 }
